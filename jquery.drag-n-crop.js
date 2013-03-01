@@ -2,21 +2,33 @@
  * jquery.drag-n-crop
  * https://github.com/fiszer/drag-n-crop
  *
- * Copyright (c) 2012 Lukasz Fiszer
+ * Copyright (c) 2013 Lukasz Fiszer
  * Licensed under the MIT license.
  */
 
 ;(function ( $, window, document, undefined ) {
 
-    $.widget( "fotomaton.drag2crop" , {
+    $.widget( "lukaszfiszer.dragncrop" , {
 
         options: {
-            containmentClass: 'containment',
-            overlayClass: 'overlay',
-            containerActiveClass: 'dragging',
-            position: { top: 0, left: 0 },
+
+            // Classes
+            containmentClass: 'dragncrop-containment',
+            containerActiveClass: 'dragncrop-dragging',
+            noOverflowClass: 'dragncrop-no-overflow',
+            horizontalClass: 'dragncrop-horizontal',
+            verticalClass: 'dragncrop-vertical',
+
+            // Initial position
+            position: { x: 0, y: 0 },
             centered: false,
-            overlay: false
+
+            // Overflow:
+            overflow: true,
+
+            // Overlay
+            overlay: false,
+            overlayClass: 'dragndrop-overlay'
         },
 
         move: function ( position ) {
@@ -25,28 +37,34 @@
             throw new Error('position object must be provided');
           }
 
-          if (position.left === undefined && position.top === undefined ) {
+          if (position.x === undefined && position.y === undefined ) {
             throw new Error('position object must contain "left" or "top" props');
           }
 
-          if( $.isNumeric(position.left) && this.axis === 'x'){
+          if( $.isNumeric(position.x) && this.axis === 'x'){
 
-            var left = - position.left * this.offsetX;
+            var left = - position.x * this.offsetX;
             this.element.css('left', left);
 
-          } else if( $.isNumeric(position.top) && this.axis === 'y'){
+          } else if( $.isNumeric(position.y) && this.axis === 'y'){
 
-            var top = - position.top * this.offsetY;
+            var top = - position.y * this.offsetY;
             this.element.css('top', top);
 
           }
         },
 
-        getPosition: function( position ) {
+        _getPosition: function( ui ) {
 
           return {
-            left : ( - position.left / this.offsetX) || 0,
-            top : (- position.top / this.offsetY) || 0
+            position : {
+              x : ( -ui.position.left / this.offsetX) || null,
+              y : ( -ui.position.top / this.offsetY) || null
+            },
+            offset : {
+              x : ( -ui.position.left / this.containerWidth) || null,
+              y : ( -ui.position.top / this.containerHeight) || null
+            }
           };
 
         },
@@ -57,13 +75,38 @@
 
             this.container = $(this.element.parent());
 
+            if( !this.options.overflow){
+              $(this.container).addClass(this.options.noOverflowClass);
+            }
+
             var dfd = this.element.imagesLoaded();
             var self = this;
 
             dfd.done( function( ){
-              self._getDimensions.call(self);
-              self._makeDraggable.call(self);
+              if(self._checkProportions()){
+                self._getDimensions.call(self);
+                self._makeDraggable.call(self);
+              }
             } );
+
+        },
+
+        _checkProportions: function() {
+
+          this.width = this.element.width();
+          this.height = this.element.height();
+          this.containerWidth = this.container.width();
+          this.containerHeight = this.container.height();
+
+          if (this.width > this.height) {
+            $(this.container).addClass(this.options.horizontalClass);
+            return true;
+          } else if (this.width < this.height) {
+            $(this.container).addClass(this.options.verticalClass);
+            return true;
+          }else{
+            return false;
+          }
 
         },
 
@@ -78,18 +121,22 @@
 
         _makeDraggable : function () {
 
-          var containement = this._insertContainment();
-          var overlay      = this._insertOverlay();
           var axis         = this.axis;
           var position     = this.options.position;
+          var containement = this._insertContainment();
 
           var draggable = this.draggable = this.element.draggable({
             axis: axis,
             containment: containement
           });
 
-          draggable.bind('dragstart', $.proxy( function () {
+          draggable.bind('dragstart', $.proxy( function (event, ui) {
+            this._dragStart( event , ui );
             this.container.addClass( this.options.containerActiveClass );
+          }, this) );
+
+          draggable.bind('drag', $.proxy( function( event, ui ){
+            this._dragging( event , ui );
           }, this) );
 
           draggable.bind('dragstop', $.proxy( function( event, ui ){
@@ -98,25 +145,32 @@
           }, this) );
 
           if(this.options.overlay){
+            var overlay      = this._insertOverlay();
             draggable.bind('drag', $.proxy( function ( event, ui ) {
               this._adaptOverlay( ui );
             }, this) );
           }
 
           if(this.options.centered){
-            position = {left: 0.5, top: 0.5};
+            position = {x: 0.5, y: 0.5};
           }
 
-          if( position && ( position.top !== 0 || position.left !== 0)) {
+          if( position && ( position.x !== 0 || position.y !== 0)) {
             this.move(position);
           }
 
         },
 
+        _dragStart: function( event, ui ) {
+          this._trigger('start', event, this._getPosition(ui) );
+        },
+
+        _dragging: function( event, ui ) {
+          this._trigger('drag', event, this._getPosition(ui) );
+        },
+
         _dragStop: function( event, ui ) {
-
-          this._trigger('dragged', event, this.getPosition(ui.position) );
-
+          this._trigger('stop', event, this._getPosition(ui) );
         },
 
         _adaptOverlay: function( ui ) {
