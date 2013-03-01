@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../drag-n-crop.css">
+
+</head>
+<body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+            <![endif]-->
+
+            <p>Hello world! This is example page of jquery.drag-n-crop.js</p>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/300/200" id="example1"/>
+                </div>
+                <pre>
+                    <code>$('#example1').dragncrop();</code>
+                </pre>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/400/300" id="example2"/>
+                </div>
+                <pre>
+                    <code>$('#example2').dragncrop({overlay: true});</code>
+                </pre>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/450/200" id="example3"/>
+                </div>
+                <pre>
+                    <code>$('#example3').dragncrop({overflow: false});</code>
+                </pre>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/400/200" id="example-centered"/>
+                </div>
+                <pre>
+                    <code>$('#example-centered').dragncrop({centered: true});</code>
+                </pre>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/200/400" id="example-horizontal"/>
+                </div>
+                <pre>
+                    <code>$('#example-horizontal').dragncrop({overlay: true});</code>
+                </pre>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/250/350" id="example-custom-position"/>
+                </div>
+                <pre>
+                    <code>$('#example-custom-position').dragncrop({position:{top:1}});</code>
+                </pre>
+            </div>
+
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/300/200" id="example-event"/>
+                </div>
+                <div id="example-event-title"></div>
+                <div id="example-event-data">
+                </div>
+                <pre>
+                    <code>$('#example-event').dragncrop({
+                        drag: function(){ ... }
+                        stop: function(){ ... }
+                    });</code>
+                </pre>
+            </div>
+
+            <div class="dragncrop" style="width: 200px; height:200px">
+                <img src="http://placekitten.com/g/600/400" id="example-event-emitter"/>
+            </div>
+            <div class="dragncrop" style="width: 400px; height:400px">
+                <img src="http://placekitten.com/g/600/400" id="example-event-receiver"/>
+            </div>
+            <div id="example-event-title"></div>
+            <div id="example-event-data">
+            </div>
+            <pre>
+                <code>$('#example-event').dragncrop({
+                    drag: function(){ ... }
+                    stop: function(){ ... }
+                });</code>
+            </pre>
+
+
+            <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+            <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+            <script src="../jquery.drag-n-crop.js"></script>
+            <script src="http://github.com/desandro/imagesloaded/raw/master/jquery.imagesloaded.min.js"></script>
+            <script type="text/javascript">
+            $('#example1').dragncrop();
+            $('#example2').dragncrop({overlay: true})
+            $('#example3').dragncrop({overflow: false})
+            $('#example-centered').dragncrop({centered: true});
+            $('#example-horizontal').dragncrop({overlay: true});
+            $('#example-custom-position').dragncrop({position:{top:1}});
+                    $('#example-event').dragncrop({
+                        start: function( event, data ){
+                            $('#example-event-title').text('start');
+                            $('#example-event-data').text(JSON.stringify(data));
+                        },
+                        drag: function( event, data ){
+                            $('#example-event-title').text('drag');
+                            $('#example-event-data').text(JSON.stringify(data));
+                        },
+                        stop: function( event, data ){
+                            $('#example-event-title').text('stop');
+                            $('#example-event-data').text(JSON.stringify(data));
+                        }
+                    });
+
+            $('#example-event-receiver').dragncrop({
+                drag: function( event, data ){
+                    $('#example-event-emitter').dragncrop('move', data.position);
+                }
+            });
+            $('#example-event-emitter').dragncrop({
+                drag: function( event, data ){
+                    $('#example-event-receiver').dragncrop('move', data.position);
+                }
+            });
+
+            </script>
+        </body>
+        </html>

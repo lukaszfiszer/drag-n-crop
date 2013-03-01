@@ -1,0 +1,56 @@
+.dragncrop {
+  position: relative;
+  overflow: hidden;
+}
+
+.dragncrop-horizontal {
+  cursor:col-resize;
+}
+
+.dragncrop-vertical {
+  cursor:row-resize;
+}
+
+.dragncrop img {
+  display: block;
+  max-width: none;
+  max-height: none;
+}
+
+.dragncrop-dragging {
+  overflow: visible;
+}
+
+.dragncrop-dragging.dragncrop-no-overflow {
+  overflow: hidden;
+}
+
+.dragncrop-horizontal img {
+  max-height: 100%;
+  width: auto;
+}
+
+.dragncrop-vertical img {
+  max-width: 100%;
+  width: auto;
+}
+
+.dragncrop-horizontal .dragncrop-containment {
+  position: absolute;
+}
+
+.dragndrop-overlay {
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-style: solid;
+  border-color: black;
+  border-width: 0;
+}
+
+.dragncrop-dragging .dragndrop-overlay {
+  z-index: 1;
+}
