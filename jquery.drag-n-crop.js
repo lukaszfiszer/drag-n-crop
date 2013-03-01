@@ -1,6 +1,6 @@
-/*
+/*!
  * jquery.drag-n-crop
- * https://github.com/fiszer/drag-n-crop
+ * https://github.com/lukaszfiszer/drag-n-crop
  *
  * Copyright (c) 2013 Lukasz Fiszer
  * Licensed under the MIT license.
@@ -54,6 +54,26 @@
           }
         },
 
+        _create: function () {
+
+          this.container = $(this.element.parent());
+
+          if( !this.options.overflow){
+            $(this.container).addClass(this.options.noOverflowClass);
+          }
+
+          var dfd = this.element.imagesLoaded();
+          var self = this;
+
+          dfd.done( function( ){
+            if(self._checkProportions()){
+              self._getDimensions.call(self);
+              self._makeDraggable.call(self);
+            }
+          } );
+
+        },
+
         _getPosition: function( ui ) {
 
           return {
@@ -66,28 +86,6 @@
               y : ( -ui.position.top / this.containerHeight) || null
             }
           };
-
-        },
-
-        //Setup widget (eg. element creation, apply theming
-        // , bind events etc.)
-        _create: function () {
-
-            this.container = $(this.element.parent());
-
-            if( !this.options.overflow){
-              $(this.container).addClass(this.options.noOverflowClass);
-            }
-
-            var dfd = this.element.imagesLoaded();
-            var self = this;
-
-            dfd.done( function( ){
-              if(self._checkProportions()){
-                self._getDimensions.call(self);
-                self._makeDraggable.call(self);
-              }
-            } );
 
         },
 
@@ -117,7 +115,6 @@
           this.axis = this.element.width() / this.element.height() > 1 ? 'x' : 'y';
 
         },
-
 
         _makeDraggable : function () {
 
@@ -188,7 +185,6 @@
                         .css('border-top-width', -ui.position.top)
                         .css('bottom', -ui.position.top - this.offsetY )
                         .css('border-bottom-width', ui.position.top + this.offsetY );
-
           }
 
         },
@@ -214,6 +210,7 @@
           var overlay = $('<div>').addClass(this.options.overlayClass);
           this.overlay = overlay.insertBefore(this.element);
           return this.overlay;
+
         }
 
     });
