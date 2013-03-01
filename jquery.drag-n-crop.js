@@ -13,8 +13,9 @@
         options: {
 
             // Classes
-            containmentClass: 'dragncrop-containment',
+            containerClass: 'dragncrop',
             containerActiveClass: 'dragncrop-dragging',
+            containmentClass: 'dragncrop-containment',
             noOverflowClass: 'dragncrop-no-overflow',
             horizontalClass: 'dragncrop-horizontal',
             verticalClass: 'dragncrop-vertical',
@@ -57,6 +58,7 @@
         _create: function () {
 
           this.container = $(this.element.parent());
+          this.container.addClass(this.options.containerClass);
 
           if( !this.options.overflow){
             $(this.container).addClass(this.options.noOverflowClass);
