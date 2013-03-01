@@ -1,0 +1,36 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link rel="stylesheet" href="../components/mocha/mocha.css" />
+  <link rel="stylesheet" href="../drag-n-crop.css" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../components/jquery/jquery.min.js"></script>
+  <script src="../components/jquery-ui/ui/jquery.ui.core.js"></script>
+  <script src="../components/jquery-ui/ui/jquery.ui.widget.js"></script>
+  <script src="../components/jquery-ui/ui/jquery.ui.mouse.js"></script>
+  <script src="../components/jquery-ui/ui/jquery.ui.draggable.js"></script>
+  <script src="../components/imagesloaded/jquery.imagesloaded.js"></script>
+  <script src="../jquery.drag-n-crop.js"></script>
+  <script src="../components/mocha/mocha.js"></script>
+  <script src="../components/chai/chai.js"></script>
+  <script type="text/javascript">
+    assert = chai.assert;
+    mocha.ui('bdd');
+    mocha.reporter('html');
+  </script>
+  <script src="runner.js"></script>
+  <script type="text/javascript">
+    if (window.mochaPhantomJS) {
+      window.mochaPhantomJS.run();
+    } else {
+      window.mocha.run();
+    }
+  </script>
+  <div id="sandbox" style="width: 1px; height: 1px; overflow: scroll">
+  </div>
+
+</body>
+</html>
