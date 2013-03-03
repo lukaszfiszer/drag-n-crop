@@ -57,7 +57,59 @@ describe('jquery.dragncrop.js', function() {
       });
     });
 
+  });
 
+  describe('destroy method', function() {
+
+    it('removes draggable widget', function(done) {
+      var err = null;
+      var el = $('#imgv').dragncrop();
+
+      el.imagesLoaded(function() {
+        el.dragncrop('destroy');
+        try {
+          el.draggable('widget');
+        }
+        catch (e){
+          err = e;
+        }
+        assert.isNotNull(err, 'Catched error');
+        done();
+      });
+    });
+
+    it('returns element inner html to the initial state', function(done) {
+      var err = null;
+      var el = $('#imgv').dragncrop();
+      var before = el.parent().children();
+      el.imagesLoaded(function() {
+        var after = el.dragncrop('destroy').parent().children();
+        assert.equal(before.length, after.length);
+        done();
+      });
+    });
+
+    it('cleans up classes from container', function(done) {
+      var err = null;
+      var el = $('#imgv').dragncrop();
+      var before = el.parent().attr('class');
+      el.imagesLoaded(function() {
+        var after = el.dragncrop('destroy').parent().attr('class');
+        assert.equal(before, after);
+        done();
+      });
+    });
+
+    it('cleans up classes from element', function(done) {
+      var err = null;
+      var el = $('#imgv').dragncrop();
+      var before = el.attr('class') || '';
+      el.imagesLoaded(function() {
+        var after = el.dragncrop('destroy').attr('class');
+        assert.equal(before, after);
+        done();
+      });
+    });
 
   });
 

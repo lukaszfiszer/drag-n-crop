@@ -10,35 +10,37 @@
 
     $.widget( "lukaszfiszer.dragncrop" , {
 
+        classes: {
+          // Basic classes
+          container: 'dragncrop',
+          containerActive: 'dragncrop-dragging',
+          containment: 'dragncrop-containment',
+          horizontal: 'dragncrop-horizontal',
+          vertical: 'dragncrop-vertical',
+
+          // Options' classes
+          overflow: 'dragncrop-overflow',
+          overlay: 'dragncrop-overlay',
+          instruction: 'dragncrop-instruction',
+          instructionHide: 'dragncrop-instruction-autohide',
+          instructionText: 'dragncrop-instruction-text'
+        },
+
         options: {
-
-          // Classes
-          containerClass: 'dragncrop',
-          containerActiveClass: 'dragncrop-dragging',
-          containmentClass: 'dragncrop-containment',
-          noOverflowClass: 'dragncrop-no-overflow',
-          horizontalClass: 'dragncrop-horizontal',
-          verticalClass: 'dragncrop-vertical',
-
           // Initial position
           position: { x: 0, y: 0 },
           centered: false,
 
           // Simple overflow:
           overflow: false,
-          overflowClass: 'dragncrop-overflow',
 
           // Overflaid overflow
           overlay: false,
-          overlayClass: 'dragncrop-overlay',
 
           // Drag instruction
           instruction: false,
           instructionText: 'Drag to crop',
           instructionHideOnHover: true,
-          instructionClass: 'dragncrop-instruction',
-          instructionHideClass: 'dragncrop-instruction-autohide'
-
         },
 
         move: function ( position ) {
@@ -67,14 +69,10 @@
         _create: function () {
 
           this.container = $(this.element.parent());
-          this.container.addClass(this.options.containerClass);
+          this.container.addClass(this.classes.container);
 
-          if( this.options.overflow){
-            $(this.container).addClass(this.options.overflowClass);
-          }
-
-          if( this.options.overlay){
-            $(this.container).addClass(this.options.overflowClass);
+          if( this.options.overflow || this.options.overlay){
+            $(this.container).addClass(this.classes.overflow);
           }
 
           var dfd = this.element.imagesLoaded();
@@ -87,6 +85,15 @@
             }
           } );
 
+        },
+
+        _destroy: function() {
+          this.draggable.draggable('destroy');
+          this.container.find('.' + this.classes.containment + ',' +
+                            '.' + this.classes.overlay  + ',' +
+                            '.' + this.classes.instruction).remove();
+          this.element.removeClass(this.classes.horizontal)
+                      .removeClass(this.classes.vertical);
         },
 
         _getPosition: function( ui ) {
@@ -112,10 +119,10 @@
           this.containerHeight = this.container.height();
 
           if (this.width > this.height) {
-            $(this.element).addClass(this.options.horizontalClass);
+            $(this.element).addClass(this.classes.horizontal);
             return true;
           } else if (this.width < this.height) {
-            $(this.element).addClass(this.options.verticalClass);
+            $(this.element).addClass(this.classes.vertical);
             return true;
           }else{
             return false;
@@ -142,25 +149,25 @@
             containment: containement
           });
 
-          draggable.bind('dragstart', $.proxy( function (event, ui) {
-            this._dragStart( event , ui );
-            this.container.addClass( this.options.containerActiveClass );
-          }, this) );
-
-          draggable.bind('drag', $.proxy( function( event, ui ){
-            this._dragging( event , ui );
-          }, this) );
-
-          draggable.bind('dragstop', $.proxy( function( event, ui ){
-            this._dragStop( event , ui );
-            this.container.removeClass( this.options.containerActiveClass );
-          }, this) );
+          this._on({
+            dragstart: function (event, ui) {
+              this._dragStart( event , ui );
+              this.container.addClass( this.classes.containerActive );
+            },
+            drag: function( event, ui ){
+              this._dragging( event , ui );
+              if (this.options.overlay) {
+                this._adaptOverlay( ui );
+              }
+            },
+            dragstop: function( event, ui ){
+              this._dragStop( event , ui );
+              this.container.removeClass( this.classes.containerActive );
+            }
+          });
 
           if(this.options.overlay){
-            var overlay      = this._insertOverlay();
-            draggable.bind('drag', $.proxy( function ( event, ui ) {
-              this._adaptOverlay( ui );
-            }, this) );
+            this._insertOverlay();
           }
 
           if(this.options.instruction){
@@ -192,7 +199,7 @@
 
         _insertOverlay: function(){
 
-          var overlay = $('<div>').addClass(this.options.overlayClass);
+          var overlay = $('<div>').addClass(this.classes.overlay);
           this.overlay = overlay.insertBefore(this.element);
           return this.overlay;
 
@@ -224,7 +231,7 @@
           var left   = - this.offsetX;
           var right  = - this.offsetX;
 
-          var containment = $('<div/>').addClass(this.options.containmentClass)
+          var containment = $('<div/>').addClass(this.classes.containment)
                             .css('top',top).css('bottom', bottom)
                             .css('left',left).css('right',right)
                             .css('position','absolute');
@@ -235,12 +242,14 @@
         },
 
         _insertInstruction: function() {
-          this.instruction = $('<div>').addClass(this.options.instructionClass);
+          this.instruction = $('<div>').addClass(this.classes.instruction);
           if(this.options.instructionHideOnHover){
-            this.instruction.addClass(this.options.instructionHideClass);
+            this.instruction.addClass(this.classes.instructionHide);
           }
-          // this.instruction.append('<span class="dragncrop-instruction-icon"></span>');
-          this.instruction.append('<span class="dragncrop-instruction-text">' + this.options.instructionText + '</span>');
+          this.instruction.append(
+            $('<span></span>').text(this.options.instructionText)
+                              .addClass(this.classes.instructionText)
+          );
           this.instruction.insertAfter(this.element);
           return this.instruction;
         },
