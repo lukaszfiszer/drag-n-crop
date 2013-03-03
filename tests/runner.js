@@ -37,6 +37,16 @@ describe('jquery.dragncrop.js', function() {
       assert.isTrue(el.parent().hasClass('dragncrop'));
     });
 
+    it('applies a class on the element in function of proportion', function(done) {
+      $('#imgv').dragncrop();
+      $('#imgh').dragncrop();
+      $('#sandbox img').imagesLoaded(function() {
+        assert.isTrue($('#imgv').hasClass('dragncrop-horizontal'));
+        assert.isTrue($('#imgh').hasClass('dragncrop-vertical'));
+        done();
+      });
+    });
+
     it('resizes img to container', function(done) {
       $('#imgv').dragncrop();
       $('#imgh').dragncrop();
@@ -46,6 +56,8 @@ describe('jquery.dragncrop.js', function() {
         done();
       });
     });
+
+
 
   });
 

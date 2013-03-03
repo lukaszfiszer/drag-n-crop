@@ -12,24 +12,26 @@
 
         options: {
 
-            // Classes
-            containerClass: 'dragncrop',
-            containerActiveClass: 'dragncrop-dragging',
-            containmentClass: 'dragncrop-containment',
-            noOverflowClass: 'dragncrop-no-overflow',
-            horizontalClass: 'dragncrop-horizontal',
-            verticalClass: 'dragncrop-vertical',
+          // Classes
+          containerClass: 'dragncrop',
+          containerActiveClass: 'dragncrop-dragging',
+          containmentClass: 'dragncrop-containment',
+          noOverflowClass: 'dragncrop-no-overflow',
+          horizontalClass: 'dragncrop-horizontal',
+          verticalClass: 'dragncrop-vertical',
 
-            // Initial position
-            position: { x: 0, y: 0 },
-            centered: false,
+          // Initial position
+          position: { x: 0, y: 0 },
+          centered: false,
 
-            // Overflow:
-            overflow: true,
+          // Simple overflow:
+          overflow: false,
+          overflowClass: 'dragncrop-overflow',
 
-            // Overlay
-            overlay: false,
-            overlayClass: 'dragndrop-overlay'
+          // Overflaid overflow
+          overlay: false,
+          overlayClass: 'dragncrop-overlay'
+
         },
 
         move: function ( position ) {
@@ -60,8 +62,12 @@
           this.container = $(this.element.parent());
           this.container.addClass(this.options.containerClass);
 
-          if( !this.options.overflow){
-            $(this.container).addClass(this.options.noOverflowClass);
+          if( this.options.overflow){
+            $(this.container).addClass(this.options.overflowClass);
+          }
+
+          if( this.options.overlay){
+            $(this.container).addClass(this.options.overflowClass);
           }
 
           var dfd = this.element.imagesLoaded();
@@ -99,10 +105,10 @@
           this.containerHeight = this.container.height();
 
           if (this.width > this.height) {
-            $(this.container).addClass(this.options.horizontalClass);
+            $(this.element).addClass(this.options.horizontalClass);
             return true;
           } else if (this.width < this.height) {
-            $(this.container).addClass(this.options.verticalClass);
+            $(this.element).addClass(this.options.verticalClass);
             return true;
           }else{
             return false;
@@ -172,6 +178,15 @@
           this._trigger('stop', event, this._getPosition(ui) );
         },
 
+
+        _insertOverlay: function(){
+
+          var overlay = $('<div>').addClass(this.options.overlayClass);
+          this.overlay = overlay.insertBefore(this.element);
+          return this.overlay;
+
+        },
+
         _adaptOverlay: function( ui ) {
 
           if ( this.axis === 'x' ) {
@@ -203,17 +218,12 @@
                             .css('left',left).css('right',right)
                             .css('position','absolute');
 
-          return this.containment = containment.insertBefore(this.element);
+          this.containment = containment.insertBefore(this.element);
+          return this.containment;
 
         },
 
-        _insertOverlay: function(){
 
-          var overlay = $('<div>').addClass(this.options.overlayClass);
-          this.overlay = overlay.insertBefore(this.element);
-          return this.overlay;
-
-        }
 
     });
 

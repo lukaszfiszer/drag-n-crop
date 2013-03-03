@@ -1,5 +1,5 @@
 {
-  "name": "drag-n-crop",
+  "name": "jquery.drag-n-crop",
   "version": "0.0.1",
   "main": "drag-n-drop.js",
   "ignore": [
@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "jquery": "~1.9.1",
-    "jquery-ui": "~1.10.1",
+    "jquery-ui": "~1.10.1"
   },
   "devDependencies": {
     "mocha": "~1.8.1",

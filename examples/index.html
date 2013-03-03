@@ -34,7 +34,7 @@
                     <img src="http://placekitten.com/g/400/300" id="example2"/>
                 </div>
                 <pre>
-                    <code>$('#example2').dragncrop({overlay: true});</code>
+                    <code>$('#example2').dragncrop({simpleOverflow: true});</code>
                 </pre>
             </div>
 
@@ -43,7 +43,7 @@
                     <img src="http://placekitten.com/g/450/200" id="example3"/>
                 </div>
                 <pre>
-                    <code>$('#example3').dragncrop({overflow: false});</code>
+                    <code>$('#example3').dragncrop({overflow: true, overlay: true});</code>
                 </pre>
             </div>
 
@@ -113,8 +113,8 @@
             <script src="http://github.com/desandro/imagesloaded/raw/master/jquery.imagesloaded.min.js"></script>
             <script type="text/javascript">
             $('#example1').dragncrop();
-            $('#example2').dragncrop({overlay: true})
-            $('#example3').dragncrop({overflow: false})
+            $('#example2').dragncrop({overflow: true});
+            $('#example3').dragncrop({overflow: true, overlay: true});
             $('#example-centered').dragncrop({centered: true});
             $('#example-horizontal').dragncrop({overlay: true});
             $('#example-custom-position').dragncrop({position:{top:1}});

@@ -1,45 +1,54 @@
+/*
+  DEFAULT CLASSES
+*/
+
 .dragncrop {
   position: relative;
   overflow: hidden;
 }
 
+.dragncrop img {
+  display: block;
+}
+
+/* TODO: cross-browser cursors */
+.ui-draggable {
+  cursor:grab;
+  cursor:-moz-grab;
+  cursor:-webkit-grab;
+}
+
+.ui-draggable-dragging {
+  cursor:grabbing;
+  cursor:-moz-grabbing;
+  cursor:-webkit-grabbing;
+}
+
 .dragncrop-horizontal {
-  cursor:col-resize;
+  max-width: none;
+  height: 100%;
 }
 
 .dragncrop-vertical {
-  cursor:row-resize;
-}
-
-.dragncrop img {
-  display: block;
-  max-width: none;
+  width: 100%;
   max-height: none;
 }
 
-.dragncrop-dragging {
-  overflow: visible;
-}
-
-.dragncrop-dragging.dragncrop-no-overflow {
-  overflow: hidden;
-}
-
-.dragncrop-horizontal img {
-  max-height: 100%;
-  width: auto;
-}
-
-.dragncrop-vertical img {
-  max-width: 100%;
-  width: auto;
-}
-
-.dragncrop-horizontal .dragncrop-containment {
+.dragncrop-containment {
   position: absolute;
 }
 
-.dragndrop-overlay {
+/*
+  OPTIONAL CLASSES
+*/
+
+/* Overlow */
+.dragncrop-dragging.dragncrop-overflow {
+  overflow: visible;
+}
+
+/* Overlay */
+.dragncrop-overlay {
   position: absolute;
   opacity: 0.5;
   top: 0;
@@ -51,6 +60,6 @@
   border-width: 0;
 }
 
-.dragncrop-dragging .dragndrop-overlay {
+.dragncrop-dragging .dragncrop-overlay {
   z-index: 1;
 }
