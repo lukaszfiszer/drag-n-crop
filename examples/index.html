@@ -11,6 +11,10 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../drag-n-crop.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="../jquery.drag-n-crop.js"></script>
+    <script src="http://github.com/desandro/imagesloaded/raw/master/jquery.imagesloaded.min.js"></script>
 
 </head>
 <body>
@@ -46,6 +50,40 @@
                     <code>$('#example3').dragncrop({overflow: true, overlay: true});</code>
                 </pre>
             </div>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/300/200" id="example-instructions"/>
+                </div>
+                <pre>
+                    <code>$('#example-instructions').dragncrop({
+                        instruction: true
+                    });</code>
+                </pre>
+            </div>
+            <script type="text/javascript">
+                $('#example-instructions').dragncrop({
+                    instruction: true
+                });
+            </script>
+
+            <div class="photo-wrapper">
+                <div class="dragncrop" style="width: 200px; height:200px">
+                    <img src="http://placekitten.com/g/200/400" id="example-instructions2"/>
+                </div>
+                <pre>
+                    <code>$('#example-instructions2').dragncrop({
+                    instruction: true,
+                    instructionText: 'Przeciągnij aby wykadrować'
+                });</code>
+                </pre>
+            </div>
+            <script type="text/javascript">
+                $('#example-instructions2').dragncrop({
+                    instruction: true,
+                    instructionText: 'Przeciągnij aby wykadrować'
+                });
+            </script>
 
             <div class="photo-wrapper">
                 <div class="dragncrop" style="width: 200px; height:200px">
@@ -107,10 +145,6 @@
             </pre>
 
 
-            <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-            <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-            <script src="../jquery.drag-n-crop.js"></script>
-            <script src="http://github.com/desandro/imagesloaded/raw/master/jquery.imagesloaded.min.js"></script>
             <script type="text/javascript">
             $('#example1').dragncrop();
             $('#example2').dragncrop({overflow: true});

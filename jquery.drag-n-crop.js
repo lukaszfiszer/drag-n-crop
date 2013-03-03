@@ -30,7 +30,14 @@
 
           // Overflaid overflow
           overlay: false,
-          overlayClass: 'dragncrop-overlay'
+          overlayClass: 'dragncrop-overlay',
+
+          // Drag instruction
+          instruction: false,
+          instructionText: 'Drag to crop',
+          instructionHideOnHover: true,
+          instructionClass: 'dragncrop-instruction',
+          instructionHideClass: 'dragncrop-instruction-autohide'
 
         },
 
@@ -156,6 +163,10 @@
             }, this) );
           }
 
+          if(this.options.instruction){
+            this._insertInstruction();
+          }
+
           if(this.options.centered){
             position = {x: 0.5, y: 0.5};
           }
@@ -221,6 +232,17 @@
           this.containment = containment.insertBefore(this.element);
           return this.containment;
 
+        },
+
+        _insertInstruction: function() {
+          this.instruction = $('<div>').addClass(this.options.instructionClass);
+          if(this.options.instructionHideOnHover){
+            this.instruction.addClass(this.options.instructionHideClass);
+          }
+          // this.instruction.append('<span class="dragncrop-instruction-icon"></span>');
+          this.instruction.append('<span class="dragncrop-instruction-text">' + this.options.instructionText + '</span>');
+          this.instruction.insertAfter(this.element);
+          return this.instruction;
         },
 
 
