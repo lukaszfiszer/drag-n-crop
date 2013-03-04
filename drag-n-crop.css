@@ -103,7 +103,8 @@
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T2NkQAL////vAXKDgDiQkZHxIrIcsWxGmEKgYXOA7GQo/z2QdiTHULCBaIbB7CDLUEagYQZAE84CMRMWb+0FutKFWO+C1MFcaAdkGwFxP1TzOSBdDMT3gQY+JNlAqLcdgPR+qGaSXQazFDlSRg0kLXZHwxCc/QZxsgG6DpT1DIF4AjS2QHkblPUekJz1oIUDKO/Ccw1S3iU5C+Irvj4ADXYgtUzEVcCSZRi8+IJ5EVoFgEptkl0GMwMA7BJsFXeMXW4AAAAASUVORK5CYII=');
 }
 
-img:hover ~ .dragncrop-instruction-autohide {
+.dragncrop:hover .dragncrop-instruction-autohide,
+.dragncrop-dragging .dragncrop-instruction-autohide {
   display: none;
 }
 
