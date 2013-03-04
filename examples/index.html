@@ -96,7 +96,7 @@
 
             <div class="photo-wrapper">
                 <div class="dragncrop" style="width: 200px; height:200px">
-                    <img src="http://placekitten.com/g/200/400" id="example-horizontal"/>
+                    <img src="http://placekitten.com/g/200/350" id="example-horizontal"/>
                 </div>
                 <pre>
                     <code>$('#example-horizontal').dragncrop({overlay: true});</code>
@@ -105,17 +105,22 @@
 
             <div class="photo-wrapper">
                 <div class="dragncrop" style="width: 200px; height:200px">
-                    <img src="http://placekitten.com/g/250/350" id="example-custom-position"/>
+                    <img src="http://placekitten.com/g/250/400" id="example-custom-position"/>
                 </div>
                 <pre>
                     <code>$('#example-custom-position').dragncrop({position:{top:1}});</code>
                 </pre>
             </div>
+            <script type="text/javascript">
+                $('#example-custom-position').dragncrop({
+                    position: { offset:[,1] }
+                });
+            </script>
 
 
             <div class="photo-wrapper">
                 <div class="dragncrop" style="width: 200px; height:200px">
-                    <img src="http://placekitten.com/g/300/200" id="example-event"/>
+                    <img src="http://placekitten.com/g/400/200" id="example-event"/>
                 </div>
                 <div id="example-event-title"></div>
                 <div id="example-event-data">
@@ -151,7 +156,6 @@
             $('#example3').dragncrop({overflow: true, overlay: true});
             $('#example-centered').dragncrop({centered: true});
             $('#example-horizontal').dragncrop({overlay: true});
-            $('#example-custom-position').dragncrop({position:{top:1}});
                     $('#example-event').dragncrop({
                         start: function( event, data ){
                             $('#example-event-title').text('start');
@@ -169,12 +173,12 @@
 
             $('#example-event-receiver').dragncrop({
                 drag: function( event, data ){
-                    $('#example-event-emitter').dragncrop('move', data.position);
+                    $('#example-event-emitter').dragncrop('move', data);
                 }
             });
             $('#example-event-emitter').dragncrop({
                 drag: function( event, data ){
-                    $('#example-event-receiver').dragncrop('move', data.position);
+                    $('#example-event-receiver').dragncrop('move', data);
                 }
             });
 

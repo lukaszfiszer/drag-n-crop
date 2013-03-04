@@ -59,6 +59,31 @@ describe('jquery.dragncrop.js', function() {
 
   });
 
+
+  describe('getPosition method', function() {
+
+    it('returns a dictionary with two types of coordinates for horizontal images', function(done) {
+      var el = $('#imgv').dragncrop({centered: true});
+      el.imagesLoaded(function() {
+        var pos = el.dragncrop('getPosition');
+        assert.equal(pos.offset[0], '0.5');
+        assert.equal(pos.dimension[0].toPrecision(2), '0.14');
+        done();
+      });
+    });
+
+    it('returns a dictionary with two types of coordinates for vertical images', function(done) {
+      var el = $('#imgh').dragncrop({centered: true});
+      el.imagesLoaded(function() {
+        var pos = el.dragncrop('getPosition');
+        assert.equal(pos.offset[1], '0.5');
+        assert.equal(pos.dimension[1].toPrecision(2), '0.14');
+        done();
+      });
+    });
+
+  });
+
   describe('destroy method', function() {
 
     it('removes draggable widget', function(done) {

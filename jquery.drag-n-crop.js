@@ -28,7 +28,7 @@
 
         options: {
           // Initial position
-          position: { x: 0, y: 0 },
+          position: {},
           centered: false,
 
           // Simple overflow:
@@ -45,25 +45,36 @@
 
         move: function ( position ) {
 
+          var left, top, x, y;
+
           if( !position ){
             throw new Error('position object must be provided');
           }
 
-          if (position.x === undefined && position.y === undefined ) {
+          if (position.offset === undefined && position.dimension === undefined ) {
             throw new Error('position object must contain "left" or "top" props');
           }
 
-          if( $.isNumeric(position.x) && this.axis === 'x'){
-
-            var left = - position.x * this.offsetX;
+          if( this.axis === 'x' && $.isNumeric(position.offset[0]) ){
+            left = -position.offset[0] * this.offsetX;
             this.element.css('left', left);
+          } else
+          if( this.axis === 'x' && $.isNumeric(position.dimension[0]) ){
+            left = -position.dimension[0] * this.width;
+            this.element.css('left', left);
+          } else
 
-          } else if( $.isNumeric(position.y) && this.axis === 'y'){
-
-            var top = - position.y * this.offsetY;
+          if( this.axis === 'y' && $.isNumeric(position.offset[1]) ){
+            top = -position.offset[1] * this.offsetY;
             this.element.css('top', top);
-
+          } else
+          if( this.axis === 'y' && $.isNumeric(position.dimension[1]) ){
+            top = -position.dimension[1] * this.height;
+            this.element.css('left', left);
           }
+
+          this._setPosition( { left: left, top: top });
+
         },
 
         _create: function () {
@@ -90,38 +101,35 @@
         _destroy: function() {
           this.draggable.draggable('destroy');
           this.container.find('.' + this.classes.containment + ',' +
-                            '.' + this.classes.overlay  + ',' +
-                            '.' + this.classes.instruction).remove();
+                              '.' + this.classes.overlay  + ',' +
+                              '.' + this.classes.instruction).remove();
           this.element.removeClass(this.classes.horizontal)
                       .removeClass(this.classes.vertical);
         },
 
-        _getPosition: function( ui ) {
-
+        getPosition: function() {
           return {
-            position : {
-              x : ( -ui.position.left / this.offsetX) || null,
-              y : ( -ui.position.top / this.offsetY) || null
-            },
-            offset : {
-              x : ( -ui.position.left / this.containerWidth) || null,
-              y : ( -ui.position.top / this.containerHeight) || null
-            }
+            offset : [
+              ( -this.position.left / this.offsetX) || null,
+              ( -this.position.top / this.offsetY) || null
+            ],
+            dimension : [
+              ( -this.position.left / this.width) || null,
+              ( -this.position.top / this.height) || null
+            ]
           };
 
         },
 
         _checkProportions: function() {
 
-          this.width = this.element.width();
-          this.height = this.element.height();
-          this.containerWidth = this.container.width();
-          this.containerHeight = this.container.height();
+          var width = this.element.width();
+          var height = this.element.height();
 
-          if (this.width > this.height) {
+          if (width > height) {
             $(this.element).addClass(this.classes.horizontal);
             return true;
-          } else if (this.width < this.height) {
+          } else if (width < height) {
             $(this.element).addClass(this.classes.vertical);
             return true;
           }else{
@@ -132,10 +140,18 @@
 
         _getDimensions: function() {
 
-          this.offsetX = this.element.width() - this.container.width();
-          this.offsetY = this.element.height() - this.container.height();
-          this.axis = this.element.width() / this.element.height() > 1 ? 'x' : 'y';
+          this.width = this.element.width();
+          this.height = this.element.height();
+          this.containerWidth = this.container.width();
+          this.containerHeight = this.container.height();
+          this.offsetX = this.width - this.containerWidth;
+          this.offsetY = this.height - this.containerHeight;
+          this.axis = this.width / this.height > 1 ? 'x' : 'y';
 
+        },
+
+        _setPosition: function( obj ) {
+          this.position = obj;
         },
 
         _makeDraggable : function () {
@@ -175,25 +191,30 @@
           }
 
           if(this.options.centered){
-            position = {x: 0.5, y: 0.5};
+            position = { offset : [0.5, 0.5] };
           }
 
-          if( position && ( position.x !== 0 || position.y !== 0)) {
+          if( position && ( position.offset || position.coordinates)) {
             this.move(position);
+          }else{
+            this._setPosition({ left: 0, top: 0 });
           }
 
         },
 
         _dragStart: function( event, ui ) {
-          this._trigger('start', event, this._getPosition(ui) );
+          this._setPosition(ui.position);
+          this._trigger('start', event, this.getPosition() );
         },
 
         _dragging: function( event, ui ) {
-          this._trigger('drag', event, this._getPosition(ui) );
+          this._setPosition(ui.position);
+          this._trigger('drag', event, this.getPosition() );
         },
 
         _dragStop: function( event, ui ) {
-          this._trigger('stop', event, this._getPosition(ui) );
+          this._setPosition(ui.position);
+          this._trigger('stop', event, this.getPosition() );
         },
 
 
