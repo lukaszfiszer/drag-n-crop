@@ -55,20 +55,20 @@
             throw new Error('position object must contain "left" or "top" props');
           }
 
-          if( this.axis === 'x' && $.isNumeric(position.offset[0]) ){
+          if( this.axis === 'x' && position.offset ){
             left = -position.offset[0] * this.offsetX;
             this.element.css('left', left);
           } else
-          if( this.axis === 'x' && $.isNumeric(position.dimension[0]) ){
+          if( this.axis === 'x' && position.dimension ){
             left = -position.dimension[0] * this.width;
             this.element.css('left', left);
           } else
 
-          if( this.axis === 'y' && $.isNumeric(position.offset[1]) ){
+          if( this.axis === 'y' && position.offset ){
             top = -position.offset[1] * this.offsetY;
             this.element.css('top', top);
           } else
-          if( this.axis === 'y' && $.isNumeric(position.dimension[1]) ){
+          if( this.axis === 'y' && position.dimension ){
             top = -position.dimension[1] * this.height;
             this.element.css('left', left);
           }
@@ -110,12 +110,12 @@
         getPosition: function() {
           return {
             offset : [
-              ( -this.position.left / this.offsetX) || null,
-              ( -this.position.top / this.offsetY) || null
+              ( -this.position.left / this.offsetX) || 0,
+              ( -this.position.top / this.offsetY) || 0
             ],
             dimension : [
-              ( -this.position.left / this.width) || null,
-              ( -this.position.top / this.height) || null
+              ( -this.position.left / this.width) || 0,
+              ( -this.position.top / this.height) || 0
             ]
           };
 
