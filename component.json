@@ -1,7 +1,7 @@
 {
   "name": "jquery.drag-n-crop",
   "version": "0.0.1",
-  "main": "drag-n-drop.js",
+  "main": "jquery.drag-n-crop.js",
   "ignore": [
     "**/.*",
     "node_modules",
