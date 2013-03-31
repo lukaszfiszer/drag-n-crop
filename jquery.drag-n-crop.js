@@ -90,7 +90,7 @@
           var self = this;
 
           dfd.done( function( ){
-            if(self._checkProportions()){
+            if(self._setAxis.call(self)){
               self._getDimensions.call(self);
               self._makeDraggable.call(self);
             }
@@ -121,32 +121,41 @@
 
         },
 
-        _checkProportions: function() {
-
-          var width = this.element.width();
-          var height = this.element.height();
-
-          if (width > height) {
-            $(this.element).addClass(this.classes.horizontal);
-            return true;
-          } else if (width < height) {
-            $(this.element).addClass(this.classes.vertical);
-            return true;
-          }else{
-            return false;
-          }
-
-        },
-
         _getDimensions: function() {
 
           this.width = this.element.width();
           this.height = this.element.height();
+
           this.containerWidth = this.container.width();
           this.containerHeight = this.container.height();
+
           this.offsetX = this.width - this.containerWidth;
           this.offsetY = this.height - this.containerHeight;
-          this.axis = this.width / this.height > 1 ? 'x' : 'y';
+
+        },
+
+        _setAxis: function() {
+
+          this.photoRatio = this.element.width() / this.element.height();
+          this.containerRatio = this.container.width() / this.container.height();
+
+          if (this.photoRatio > this.containerRatio) {
+
+            this.axis = 'x';
+            $(this.element).addClass(this.classes.horizontal);
+            return true;
+
+          } else if (this.photoRatio < this.containerRatio) {
+
+            this.axis = 'y';
+            $(this.element).addClass(this.classes.vertical);
+            return true;
+
+          }else{
+
+            return false;
+
+          }
 
         },
 
@@ -274,8 +283,6 @@
           this.instruction.insertAfter(this.element);
           return this.instruction;
         },
-
-
 
     });
 
