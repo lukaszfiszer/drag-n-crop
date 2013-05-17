@@ -63,19 +63,23 @@ define(['jquery',
           if( this.axis === 'x' && position.offset ){
             left = -position.offset[0] * this.offsetX;
             this.element.css('left', left);
+            this.element.css('top', 0);
           } else
           if( this.axis === 'x' && position.dimension ){
             left = -position.dimension[0] * this.width;
             this.element.css('left', left);
+            this.element.css('top', 0);
           } else
 
           if( this.axis === 'y' && position.offset ){
             top = -position.offset[1] * this.offsetY;
+            this.element.css('left', 0);
             this.element.css('top', top);
           } else
           if( this.axis === 'y' && position.dimension ){
             top = -position.dimension[1] * this.height;
-            this.element.css('left', left);
+            this.element.css('left', 0);
+            this.element.css('top', top);
           }
 
           this._setPosition( { left: left, top: top });
@@ -94,12 +98,15 @@ define(['jquery',
           var dfd = this.element.imagesLoaded();
           var self = this;
 
-          dfd.done( function( ){
+          dfd.done(function(){
             if(self._setAxis.call(self)){
               self._getDimensions.call(self);
               self._makeDraggable.call(self);
+              if (self.options.loaded) {
+                self.options.loaded();
+              }
             }
-          } );
+          });
 
         },
 
