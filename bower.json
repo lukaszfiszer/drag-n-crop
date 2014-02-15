@@ -5,7 +5,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
+    "bower_components"
   ],
   "dependencies": {
     "jquery": "~1.9.1",
