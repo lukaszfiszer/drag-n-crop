@@ -3,15 +3,21 @@ beforeEach:false, afterEach:false, before:false, after:false */
 
 describe('jquery.dragncrop.js', function() {
 
+  var sandbox, imgv, imgh, assert = chai.assert;
+
+  before(function() {
+    sandbox = $('<div id="sandbox"></div>').appendTo($('body'))
+  })
+
   beforeEach(function() {
-    $('#sandbox').append($('<div style="width: 200px; height: 200px">\
-                         <img src="350x250.gif" id="imgv" /></div>'));
-    $('#sandbox').append($('<div style="width: 200px; height: 200px">\
-                         <img src="250x350.gif" id="imgh"/></div>'));
+    sandbox.append($('<div style="width: 200px; height: 200px">\
+                         <img src="/base/tests/fixtures/350x250.gif" id="imgv" /></div>'));
+    sandbox.append($('<div style="width: 200px; height: 200px">\
+                         <img src="/base/tests/fixtures/250x350.gif" id="imgh"/></div>'));
   });
 
   afterEach(function() {
-    $('#sandbox').html('');
+    sandbox.html('');
   });
 
   it('is a jquery plugin', function() {
@@ -25,10 +31,11 @@ describe('jquery.dragncrop.js', function() {
 
   describe('after initialization', function() {
 
-    it('is an instance of jquery.ui.draggable', function() {
+    it('is an instance of jquery.ui.draggable', function(done) {
       var el = $('#imgv').dragncrop().imagesLoaded(function(){
         // if is not an instance, will throw error
         el.draggable('widget');
+        done()
       });
     });
 
