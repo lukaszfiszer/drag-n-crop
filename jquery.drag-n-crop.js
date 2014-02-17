@@ -106,7 +106,7 @@
         },
 
         _destroy: function() {
-          this.draggable.draggable('destroy');
+          this.draggable && this.draggable.draggable('destroy');
           this.container.find('.' + this.classes.containment + ',' +
                               '.' + this.classes.overlay  + ',' +
                               '.' + this.classes.instruction).remove();
