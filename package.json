@@ -13,6 +13,7 @@
     "karma": "~0.10.9"
   },
   "scripts": {
+    "postinstall": "bower install",
     "test": "./node_modules/.bin/karma start --single-run"
   },
   "repository": {

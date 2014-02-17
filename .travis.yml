@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "0.10"
-before_script:
+before_install: # make "bower install" availabke
+  - npm install bower -g
+before_script: # start xvfb to use GUI browsers
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
