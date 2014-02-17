@@ -1,4 +1,4 @@
-![jquery.drag-n-crop](assets/logo.png "jQuery drag'n'crop logo")
+![jquery.drag-n-crop](/assets/logo.png "jQuery drag'n'crop logo")
 
 [![Build Status](https://travis-ci.org/lukaszfiszer/drag-n-crop.png?branch=master)](https://travis-ci.org/lukaszfiszer/drag-n-crop)
 
@@ -8,7 +8,7 @@ It aims to be minimalistic and very easy to use for the end-user. It allows to c
 
 Quick demo
 -------------
-![jquery.drag-n-crop](assets/demo.gif "jQuery drag'n'crop logo")
+![jquery.drag-n-crop](/assets/demo.gif "jQuery drag'n'crop logo")
 
 Dependencies
 -------------
