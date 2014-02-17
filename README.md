@@ -1,5 +1,7 @@
 ![jquery.drag-n-crop](assets/logo.png "jQuery drag'n'crop logo")
 
+[![Build Status](https://travis-ci.org/lukaszfiszer/drag-n-crop.png?branch=master)](https://travis-ci.org/lukaszfiszer/drag-n-crop)
+
 A jQuery plugin for croping images by dragging, inspired by Facebook cover photo.
 
 It aims to be minimalistic and very easy to use for the end-user. It allows to crop the image only in one dimension (no zooming!). A typical usecase would be to crop rectangular images into squares.  If you search for a more advanced croping plugin, there are some [other](https://github.com/tapmodo/Jcrop) [plugins](http://odyniec.net/projects/imgareaselect/) available.
