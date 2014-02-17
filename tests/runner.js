@@ -10,10 +10,8 @@ describe('jquery.dragncrop.js', function() {
   })
 
   beforeEach(function() {
-    sandbox.append($('<div style="width: 200px; height: 200px">\
-                         <img src="/base/tests/fixtures/350x250.gif" id="imgv" /></div>'));
-    sandbox.append($('<div style="width: 200px; height: 200px">\
-                         <img src="/base/tests/fixtures/250x350.gif" id="imgh"/></div>'));
+    sandbox.append($('<div style="width: 200px; height: 200px"><img src="/base/tests/fixtures/350x250.gif" id="imgh" /></div>'));
+    sandbox.append($('<div style="width: 200px; height: 200px"><img src="/base/tests/fixtures/250x350.gif" id="imgv"/></div>'));
   });
 
   afterEach(function() {
@@ -32,11 +30,12 @@ describe('jquery.dragncrop.js', function() {
   describe('after initialization', function() {
 
     it('is an instance of jquery.ui.draggable', function(done) {
-      var el = $('#imgv').dragncrop().imagesLoaded(function(){
+      var el = $('#imgv').dragncrop();
+      setTimeout(function() {
         // if is not an instance, will throw error
         el.draggable('widget');
         done()
-      });
+      }, 50);
     });
 
     it('adds class to the parent container if it is not present', function() {
@@ -44,22 +43,42 @@ describe('jquery.dragncrop.js', function() {
       assert.isTrue(el.parent().hasClass('dragncrop'));
     });
 
-    it('applies a class on the element in function of proportion', function(done) {
-      $('#imgv').dragncrop();
+    it('applies "dragncrop-horizontal" class on the element if horizontal', function(done) {
       $('#imgh').dragncrop();
+      setTimeout(function() {
+          assert.isTrue($('#imgh').hasClass('dragncrop-horizontal'));
+          done();
+      }, 50);
+    });
+
+    it('applies "dragncrop-horizontal" class on the element if vertical', function(done) {
+      $('#imgv').dragncrop();
+      setTimeout(function() {
+        assert.isTrue($('#imgv').hasClass('dragncrop-vertical'));
+        done();
+      }, 50);
+    });
+
+    it('applies "dragncrop-vertical" class on the element in function of proportion', function(done) {
+      $('#imgv').dragncrop();
       $('#sandbox img').imagesLoaded(function() {
-        assert.isTrue($('#imgv').hasClass('dragncrop-horizontal'));
-        assert.isTrue($('#imgh').hasClass('dragncrop-vertical'));
+        assert.isTrue($('#imgv').hasClass('dragncrop-vertical'));
         done();
       });
     });
 
-    it('resizes img to container', function(done) {
+    it('resizes vertical img to container', function(done) {
       $('#imgv').dragncrop();
+      $('#sandbox img').imagesLoaded(function() {
+        assert.equal($('#imgv').width(), 200);
+        done();
+      });
+    });
+
+    it('resizes horizontal img to container', function(done) {
       $('#imgh').dragncrop();
       $('#sandbox img').imagesLoaded(function() {
-        assert.equal($('#imgv').height(), 200);
-        assert.equal($('#imgh').width(), 200);
+        assert.equal($('#imgh').height(), 200);
         done();
       });
     });
@@ -70,17 +89,17 @@ describe('jquery.dragncrop.js', function() {
   describe('getPosition method', function() {
 
     it('returns a dictionary with two types of coordinates for horizontal images', function(done) {
-      var el = $('#imgv').dragncrop({centered: true});
-      el.imagesLoaded(function() {
+      var el = $('#imgh').dragncrop({centered: true});
+      setTimeout(function() {
         var pos = el.dragncrop('getPosition');
         assert.equal(pos.offset[0], '0.5');
         assert.equal(pos.dimension[0].toPrecision(2), '0.14');
         done();
-      });
+      }, 50);
     });
 
     it('returns a dictionary with two types of coordinates for vertical images', function(done) {
-      var el = $('#imgh').dragncrop({centered: true});
+      var el = $('#imgv').dragncrop({centered: true});
       el.imagesLoaded(function() {
         var pos = el.dragncrop('getPosition');
         assert.equal(pos.offset[1], '0.5');
