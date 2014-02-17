@@ -19,7 +19,9 @@ module.exports = function(config) {
       'bower_components/jquery-ui/ui/jquery.ui.widget.js',
       'bower_components/jquery-ui/ui/jquery.ui.mouse.js',
       'bower_components/jquery-ui/ui/jquery.ui.draggable.js',
-      'bower_components/imagesloaded/jquery.imagesloaded.js',
+      'bower_components/eventEmitter/EventEmitter.js',
+      'bower_components/eventie/eventie.js',
+      'bower_components/imagesloaded/imagesloaded.js',
       'bower_components/chai/chai.js',
       'jquery.drag-n-crop.js',
       'jquery.drag-n-crop.css',
@@ -68,7 +70,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['PhantomJS'],
 
 
     // If browser does not capture in given timeout [ms], kill it
