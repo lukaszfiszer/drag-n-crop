@@ -12,7 +12,8 @@
 }
 
 /* TODO: cross-browser cursors */
-.ui-draggable {
+.ui-draggable,
+.dragncrop-overlay {
   cursor:grab;
   cursor:-moz-grab;
   cursor:-webkit-grab;
