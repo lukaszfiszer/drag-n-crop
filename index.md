@@ -1,3 +1,7 @@
+---
+layout: index
+---
+
 
 ![jquery.drag-n-crop](images/logo.png "jQuery drag'n'crop logo")
 
