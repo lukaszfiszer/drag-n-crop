@@ -18,11 +18,17 @@ if [ `git rev-parse --abbrev-ref HEAD` == "master" ]; then
   git checkout master -- README.md
   mv README.md index.md
   echo -e "$LAYOUT_PREFIX\n$(cat index.md)" > index.md
-  git add index.md
 
   # Sync images directory
   ###################################################################
   git checkout master -- images
+
+  # Stage files
+  ###################################################################
   git add images
+
+  # Commit
+  ###################################################################
+  git commit -a -m "Sync docs from master branch to docs gh-pages directory"
 
 fi
