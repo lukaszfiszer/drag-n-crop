@@ -1,4 +1,4 @@
-![jquery.drag-n-crop](/assets/logo.png "jQuery drag'n'crop logo")
+![jquery.drag-n-crop](/images/logo.png "jQuery drag'n'crop logo")
 
 [![Build Status](https://travis-ci.org/lukaszfiszer/drag-n-crop.png?branch=master)](https://travis-ci.org/lukaszfiszer/drag-n-crop)
 
@@ -8,7 +8,7 @@ It aims to be minimalistic and very easy to use for the end-user. It allows to c
 
 Quick demo
 -------------
-![jquery.drag-n-crop](/assets/demo.gif "jQuery drag'n'crop logo")
+![jquery.drag-n-crop](/images/demo.gif "jQuery drag'n'crop logo")
 
 Dependencies
 -------------
@@ -41,7 +41,7 @@ jQuery drag'n'crop automatically resizes your photo.
 API
 ---
 
-*jQuery.drag'n'crop* is build using [jQuery widget factory](http://api.jqueryui.com/jQuery.widget/), providing a standard way of interacting with the plugin. It inherits all default [options, events and methods](http://api.jqueryui.com/jQuery.widget/#jQuery-Widget2) but also provides some custom ones, described below:  
+*jQuery.drag'n'crop* is build using [jQuery widget factory](http://api.jqueryui.com/jQuery.widget/), providing a standard way of interacting with the plugin. It inherits all default [options, events and methods](http://api.jqueryui.com/jQuery.widget/#jQuery-Widget2) but also provides some custom ones, described below:
 
 ### Init options
 
@@ -68,7 +68,7 @@ Here's the complete list of available options
 
 ### Position object
 
-*drag'n'crop* provides a *position* object describing the coordinates of the image inside the container with the following structure  
+*drag'n'crop* provides a *position* object describing the coordinates of the image inside the container with the following structure
 
 ```
 {
