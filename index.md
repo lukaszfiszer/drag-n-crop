@@ -1,7 +1,3 @@
----
-layout: index
----
-
 
 ![jquery.drag-n-crop](images/logo.png "jQuery drag'n'crop logo")
 
@@ -138,5 +134,3 @@ Available methods for drag'n'crop plugin:
 Release History
 ---------------
 _(Nothing yet)_
-
-
