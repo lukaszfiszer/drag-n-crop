@@ -1,0 +1,34 @@
+#!/bin/bash
+
+###
+### The following block runs after commit to "master" branch
+###
+if [ `git rev-parse --abbrev-ref HEAD` == "master" ]; then
+
+  # Layout prefix is prepended to each markdown file synced
+  ###################################################################
+  LAYOUT_PREFIX='---\r\nlayout: index\r\n---\r\n\r\n'
+
+  # Switch to gh-pages branch to sync it with master
+  ###################################################################
+  git checkout gh-pages
+
+  # Sync the README.md in master to index.md adding jekyll header
+  ###################################################################
+  git checkout master -- README.md
+  echo -e $LAYOUT_PREFIX > index.md
+  cat README.md >> index.md
+  rm README.md
+  git add index.md
+
+  # Sync images directory
+  ###################################################################
+  git checkout master -- images
+  git add images
+
+  # Sync .gitignore
+  ###################################################################
+  git checkout master -- .gitignore
+  git add .gitignore
+
+fi
