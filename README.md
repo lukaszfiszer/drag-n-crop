@@ -23,22 +23,23 @@ Dependencies
 Installation
 -----
 
-1. Include drag'n'crop JS and CSS files (+ and its dependencies, if you dont have them already) on your site.
-  ```
-  <script src='jquery.drag-n-crop.js'></script>
-  (...)
-  <link rel="stylesheet" href="jquery.drag-n-crop.css">
-  ```
-2. Wrap the photo you want to crop in a element with desired width and height
-  ```
-  <div style="width: 200px; height:200px"><img src="/path/to/photo.jpg" id="photo"/></div>
-  ```
-3. Initialize the plugin
-  ```
-  $('#photo').dragncrop();
-  ```
+1.Include drag'n'crop JS and CSS files (+ and its dependencies, if you dont have them already) on your site.
+```
+<script src='jquery.drag-n-crop.js'></script>
+(...)
+<link rel="stylesheet" href="jquery.drag-n-crop.css">
+```
+2.Wrap the photo you want to crop in a element with target width and height
 
-jQuery drag'n'crop automatically resizes your photo.
+```
+<div style="width: 200px; height:200px"><img src="/path/to/photo.jpg" id="photo"/></div>
+```
+
+3.Initialize the plugin
+```
+$('#photo').dragncrop();
+```
+
 
 API
 ---
