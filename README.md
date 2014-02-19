@@ -23,19 +23,21 @@ Dependencies
 Installation
 -----
 
-1.Include drag'n'crop JS and CSS files (+ and its dependencies, if you dont have them already) on your site.
+1.Install the plugin with bower `bower install jquery.drag-n-crop` or download it from this repo.
+
+2.Include drag'n'crop JS and CSS files (+ and its dependencies, if you dont have them already) on your site.
 ```
-<script src='jquery.drag-n-crop.js'></script>
+<script src='path/to/drag-n-crop/jquery.drag-n-crop.js'></script>
 (...)
-<link rel="stylesheet" href="jquery.drag-n-crop.css">
+<link rel="stylesheet" href="path/to/drag-n-crop/jquery.drag-n-crop.css">
 ```
-2.Wrap the photo you want to crop in a element with target width and height
+3.Wrap the photo you want to crop in a element with target width and height
 
 ```
 <div style="width: 200px; height:200px"><img src="/path/to/photo.jpg" id="photo"/></div>
 ```
 
-3.Initialize the plugin
+4.Initialize the plugin
 ```
 $('#photo').dragncrop();
 ```
@@ -139,5 +141,6 @@ See [http://lukaszfiszer.github.io/drag-n-crop/examples.html](http://lukaszfisze
 
 Release History
 ---------------
+0.1.1 - fixing manifest files
 0.1.0 - initial release
 
