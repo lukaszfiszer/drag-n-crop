@@ -117,7 +117,7 @@ chaining
   </div>
 
   <div style="width: 300px; height:300px">
-    <img src="http://lorempixel.com/400/300/city/9/" id="photo6-large"/>
+    <img src="images/photo-sf.jpeg" id="photo6-large"/>
   </div>
 
 
