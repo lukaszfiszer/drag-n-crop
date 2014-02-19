@@ -2,10 +2,17 @@
   "name": "jquery.drag-n-crop",
   "version": "0.1.0",
   "main": ["jquery.drag-n-crop.js", "jquery.drag-n-crop.css"],
+  "keywords": [
+    "jquery",
+    "drag",
+    "crop",
+    "cropping",
+    "facebook"
+  ],
   "ignore": [
     "**/.*",
+    "*.json",
     "karma.conf.js",
-    "package.json",
     "node_modules",
     "bower_components",
     "images",
