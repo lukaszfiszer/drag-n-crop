@@ -5,6 +5,9 @@
 ###
 if [ `git rev-parse --abbrev-ref HEAD` == "master" ]; then
 
+  # stash unsaved changes
+  git stash -u
+
   # Layout prefix is prepended to each markdown file synced
   ###################################################################
   LAYOUT_PREFIX='---\r\nlayout: index\r\n---\r\n\r\n'
@@ -17,16 +20,20 @@ if [ `git rev-parse --abbrev-ref HEAD` == "master" ]; then
   ###################################################################
   git checkout master -- README.md
   mv README.md index.md
-  echo -e "$LAYOUT_PREFIX\n$(cat index.md)" > index.md
-  git add --all .
+  git rm README.md
 
   # Sync images directory
   ###################################################################
   git checkout master -- images
-  git add --all .
 
   # Commit
   ###################################################################
-  git commit -a -m "Sync docs from master branch to docs gh-pages directory"
+  git add --all .
+  git commit -m "Sync docs from master branch to docs gh-pages directory"
+
+  # return to master
+  git checkout master
+
+  git stash pop
 
 fi
