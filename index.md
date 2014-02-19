@@ -1,3 +1,8 @@
+---
+layout: index
+---
+
+
 ![jquery.drag-n-crop](images/logo.png "jQuery drag'n'crop logo")
 
 [![Build Status](https://travis-ci.org/lukaszfiszer/drag-n-crop.png?branch=master)](https://travis-ci.org/lukaszfiszer/drag-n-crop)
@@ -139,4 +144,3 @@ See [http://lukaszfiszer.github.io/drag-n-crop/examples.html](http://lukaszfisze
 Release History
 ---------------
 0.1.0 - initial release
-
