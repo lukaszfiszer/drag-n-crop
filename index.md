@@ -144,5 +144,3 @@ See [http://lukaszfiszer.github.io/drag-n-crop/examples.html](http://lukaszfisze
 Release History
 ---------------
 _(Nothing yet)_
-
-
