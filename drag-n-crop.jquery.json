@@ -22,7 +22,7 @@
   "bugs": "https://github.com/lukaszfiszer/drag-n-crop/issues",
   "homepage": "http://lukaszfiszer.github.io/drag-n-crop/",
   "docs": "http://lukaszfiszer.github.io/drag-n-crop/",
-  "download": "https://github.com/lukaszfiszer",
+  "download": "https://github.com/lukaszfiszer/drag-n-crop/",
   "dependencies": {
     "jquery": ">=1.9",
     "jquery-ui": ">=1.9"
