@@ -8,7 +8,7 @@ basic usage
 ===========
 
   <div style="width: 200px; height:200px">
-    <img src="/images/photo-sf.jpeg" id="photo1"/>
+    <img src="images/photo-sf.jpeg" id="photo1"/>
   </div>
 
 <script type="text/javascript">
@@ -24,7 +24,7 @@ overflow + overlay
 ==================
 
   <div style="width: 200px; height:200px">
-    <img src="/images/photo-sf.jpeg" id="photo2"/>
+    <img src="images/photo-sf.jpeg" id="photo2"/>
   </div>
 
 <script type="text/javascript">
@@ -40,7 +40,7 @@ initial position
 ================
 
   <div style="width: 200px; height:200px">
-    <img src="/images/photo-sf.jpeg" id="photo3"/>
+    <img src="images/photo-sf.jpeg" id="photo3"/>
   </div>
 
 <script type="text/javascript">
@@ -56,7 +56,7 @@ vertical photo with instruction
 =================================
 
   <div style="width: 200px; height:200px">
-    <img src="/images/photo-ny.jpeg" id="photo4"/>
+    <img src="images/photo-ny.jpeg" id="photo4"/>
   </div>
 
 <script type="text/javascript">
@@ -72,7 +72,7 @@ event listeners
 =================================
 
   <div style="width: 200px; height:200px">
-    <img src="/images/photo-sf.jpeg" id="photo5"/>
+    <img src="images/photo-sf.jpeg" id="photo5"/>
   </div>
   <div id="photo5-log">Drag to see events</div>
 
@@ -113,7 +113,7 @@ chaining
 =================================
 
   <div style="width: 100px; height:100px">
-    <img src="/images/photo-sf.jpeg" id="photo6-small"/>
+    <img src="images/photo-sf.jpeg" id="photo6-small"/>
   </div>
 
   <div style="width: 300px; height:300px">
