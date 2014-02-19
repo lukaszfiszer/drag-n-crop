@@ -1,0 +1,30 @@
+{
+  "name": "drag-n-crop",
+  "title": "jQuery Drag-n-Crop",
+  "description": "jQuery plugin for cropping images like Facebook cover photo",
+  "keywords": [
+    "drag",
+    "crop",
+    "cropping",
+    "facebook"
+  ],
+  "version": "0.1.0",
+  "author": {
+    "name": "Lukasz Fiszer",
+    "url": "http://github.com/lukaszfiszer"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw2.github.com/lukaszfiszer/drag-n-crop/master/LICENSE"
+    }
+  ],
+  "bugs": "https://github.com/lukaszfiszer/drag-n-crop/issues",
+  "homepage": "http://lukaszfiszer.github.io/drag-n-crop/",
+  "docs": "http://lukaszfiszer.github.io/drag-n-crop/",
+  "download": "https://github.com/lukaszfiszer",
+  "dependencies": {
+    "jquery": ">=1.9",
+    "jquery-ui": ">=1.9"
+  }
+}

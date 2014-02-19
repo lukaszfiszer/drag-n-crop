@@ -1,12 +1,19 @@
 {
   "name": "jquery.drag-n-crop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "jQuery drag'n'crop plugin",
   "main": "jquery.drag-n-crop.js",
   "directories": {
     "example": "examples",
     "test": "tests"
   },
+  "keywords": [
+    "jquery",
+    "drag",
+    "crop",
+    "cropping",
+    "facebook"
+  ],
   "dependencies": {},
   "devDependencies": {
     "karma-mocha": "~0.1.1",
@@ -16,17 +23,23 @@
     "postinstall": "bower install",
     "test": "./node_modules/.bin/karma start --single-run"
   },
+  "author": {
+    "name": "Lukasz Fiszer",
+    "url": "http://github.com/lukaszfiszer"
+  },
+  "contributors": [],
   "repository": {
     "type": "git",
     "url": "git://github.com/lukaszfiszer/drag-n-crop.git"
   },
-  "author": "",
+  "homepage": "http://lukaszfiszer.github.io/drag-n-crop/",
+    "bugs": {
+    "url": "https://github.com/lukaszfiszer/drag-n-crop/issues"
+  },
   "licenses": [
     {
-      "type": "MIT"
+      "type": "MIT",
+      "url": "https://raw2.github.com/lukaszfiszer/drag-n-crop/master/LICENSE"
     }
-  ],
-  "bugs": {
-    "url": "https://github.com/lukaszfiszer/drag-n-crop/issues"
-  }
+  ]
 }
