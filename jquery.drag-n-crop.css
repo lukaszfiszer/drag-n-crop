@@ -1,0 +1,110 @@
+/*
+  DEFAULT CLASSES
+*/
+
+.dragncrop {
+  position: relative;
+  overflow: hidden;
+}
+
+.dragncrop img {
+  display: block;
+}
+
+/* TODO: cross-browser cursors */
+.ui-draggable,
+.dragncrop-overlay {
+  cursor:grab;
+  cursor:-moz-grab;
+  cursor:-webkit-grab;
+}
+
+.ui-draggable-dragging {
+  cursor:grabbing;
+  cursor:-moz-grabbing;
+  cursor:-webkit-grabbing;
+}
+
+.dragncrop-horizontal {
+  max-width: none;
+  height: 100%;
+}
+
+.dragncrop-vertical {
+  width: 100%;
+  max-height: none;
+}
+
+.dragncrop-containment {
+  position: absolute;
+}
+
+/*
+  OPTIONAL CLASSES
+*/
+
+/* Overlow */
+.dragncrop-dragging.dragncrop-overflow {
+  overflow: visible;
+}
+
+/* Overlay */
+.dragncrop-overlay {
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-style: solid;
+  border-color: black;
+  border-width: 0;
+}
+
+.dragncrop-dragging .dragncrop-overlay {
+  z-index: 1;
+}
+
+/* Instruction */
+.dragncrop-instruction {
+  position: absolute;
+  top: 40%;
+  opacity: 0.7;
+  background: black;
+  color: #DDD;
+  text-align: center;
+  border-radius: 6px;
+  line-height: 1;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  z-index: 1;
+  font-size: 0.875em;
+  right: 15%;
+  left: 15%;
+  padding: 10px 12px;
+}
+
+.dragncrop-instruction-text {
+  color: #DDD;
+  text-align: center;
+  line-height: 1;
+  font-family: sans-serif;
+  font-size: 0.875em;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  display: block;
+  padding-left: 20px
+}
+
+.dragncrop-horizontal + .dragncrop-instruction .dragncrop-instruction-text {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAqklEQVQ4T2NkoDJgpLJ5DKMGUh6i8DD8//+/ANC4XCCezMjI+IEYo7HpARsIldgNZJoAsSPQwANEGugAVLcfiM8BsTPIIYxohoHMWQDED4gxEKhGAYgToGohhgINBLnMhUgDCCnbCzLwFFCVKSGVRMrvg3l5D1CDMVTTQhK9HA/Vdx5IOyFHCsxQciIFYhgoUmBegUZOHpA/icRkg6JnNC8TmTjwKBv8YQgAitFBotB3lzcAAAAASUVORK5CYII=');
+}
+
+.dragncrop-vertical + .dragncrop-instruction .dragncrop-instruction-text {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T2NkQAL////vAXKDgDiQkZHxIrIcsWxGmEKgYXOA7GQo/z2QdiTHULCBaIbB7CDLUEagYQZAE84CMRMWb+0FutKFWO+C1MFcaAdkGwFxP1TzOSBdDMT3gQY+JNlAqLcdgPR+qGaSXQazFDlSRg0kLXZHwxCc/QZxsgG6DpT1DIF4AjS2QHkblPUekJz1oIUDKO/Ccw1S3iU5C+Irvj4ADXYgtUzEVcCSZRi8+IJ5EVoFgEptkl0GMwMA7BJsFXeMXW4AAAAASUVORK5CYII=');
+}
+
+.dragncrop:hover .dragncrop-instruction-autohide,
+.dragncrop-dragging .dragncrop-instruction-autohide {
+  display: none;
+}
