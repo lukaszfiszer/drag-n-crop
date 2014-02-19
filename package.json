@@ -1,6 +1,6 @@
 {
   "name": "jquery.drag-n-crop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "jQuery drag'n'crop plugin",
   "main": "jquery.drag-n-crop.js",
   "directories": {
