@@ -20,6 +20,7 @@ if [ `git rev-parse --abbrev-ref HEAD` == "master" ]; then
   ###################################################################
   git checkout master -- README.md
   mv README.md index.md
+  echo -e "$LAYOUT_PREFIX\n$(cat index.md)" > index.md
   git rm README.md
 
   # Sync images directory
