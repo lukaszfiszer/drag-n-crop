@@ -4,6 +4,8 @@
   "main": ["jquery.drag-n-crop.js", "jquery.drag-n-crop.css"],
   "ignore": [
     "**/.*",
+    "karma.conf.js",
+    "package.json",
     "node_modules",
     "bower_components",
     "images",
