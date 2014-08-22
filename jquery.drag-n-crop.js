@@ -112,6 +112,7 @@
                               '.' + this.classes.instruction).remove();
           this.element.removeClass(this.classes.horizontal)
                       .removeClass(this.classes.vertical);
+          this.element.css({position: '', top: '', left: ''});    
         },
 
         getPosition: function() {
