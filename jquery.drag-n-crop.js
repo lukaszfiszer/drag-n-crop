@@ -17,6 +17,7 @@
           containment: 'dragncrop-containment',
           horizontal: 'dragncrop-horizontal',
           vertical: 'dragncrop-vertical',
+          nodrag: 'dragncrop-nodrag',
 
           // Options' classes
           overflow: 'dragncrop-overflow',
@@ -100,6 +101,9 @@
               if (self.options.loaded) {
                 self.options.loaded();
               }
+            } else {
+              self._setPosition({top: 0, left: 0});
+              self.options.loaded();
             }
           } );
 
@@ -110,8 +114,12 @@
           this.container.find('.' + this.classes.containment + ',' +
                               '.' + this.classes.overlay  + ',' +
                               '.' + this.classes.instruction).remove();
+          this.container.removeClass(this.classes.overflow).removeClass(this.classes.container);
           this.element.removeClass(this.classes.horizontal)
+                      .removeClass(this.classes.nodrag)
                       .removeClass(this.classes.vertical);
+          this.element.css('left', '');
+          this.element.css('top', '');
         },
 
         getPosition: function() {
@@ -159,7 +167,7 @@
             return true;
 
           }else{
-
+            $(this.element).addClass(this.classes.nodrag);
             return false;
 
           }

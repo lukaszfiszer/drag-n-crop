@@ -35,6 +35,11 @@
   max-height: none;
 }
 
+.dragncrop-nodrag {
+  width: 100%;
+  height: 100%;
+}
+
 .dragncrop-containment {
   position: absolute;
 }
